@@ -48,7 +48,7 @@ class Order(models.Model):
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.CharField(max_length=255)  
-    image = models.ImageField(upload_to='media/Order_Img')
+    image = models.ImageField(upload_to='Order_Img')
     quantity = models.CharField(max_length=30)
     price = models.CharField(max_length=50)
     total = models.CharField(max_length=1000)
