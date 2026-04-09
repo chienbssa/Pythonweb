@@ -34,6 +34,14 @@
          Sản phẩm
         </h2>
       </div>
+      {% if query %}
+          <div class="mt-3 mb-4 text-center">
+              <h4>Kết quả tìm kiếm cho: "<span style="color: #ffbe33;">{{ query }}</span>"</h4>
+              {% if not items %}
+                  <p class="text-danger mt-2">Rất tiếc, không tìm thấy sản phẩm nào phù hợp!</p>
+              {% endif %}
+          </div>
+      {% endif %}
       <div id="alert-container">
         {% if messages %}
             {% for message in messages %}

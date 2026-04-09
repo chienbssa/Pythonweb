@@ -97,7 +97,8 @@
                     {{ cart_quantity }}
                 </span>
             </a>
-              <form class="form-inline">
+              <form class="form-inline" action="{% url 'search' %}" method="GET">
+                <input class="form-control mr-sm-2" type="search" placeholder="Tìm sản phẩm..." aria-label="Search" name="q" value="{{ request.GET.q }}">
                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
@@ -144,7 +145,7 @@
               <a href="" style="text-decoration: none;">
                 <i class="fa fa-envelope " aria-hidden="true"></i>
                 <span>
-                  quanghuyta3010@gmail.com
+                  chienbssa@gmail.com
                 </span>
               </a>
             </div>
@@ -191,7 +192,7 @@
         <p>
           {% comment %} &copy; <span id="displayYear"></span> All Rights Reserved By
           <a href="https://html.design/">Free Html Templates</a><br><br> {% endcomment %}
-          &copy; <span id="displayYear"></span> Create by Tạ Quang Huy<br><br>
+          &copy; <span id="displayYear"></span> Create by Hoàng Quang Chiến<br><br>
           {% comment %} <a href="https://themewagon.com/" target="_blank">ThemeWagon</a> {% endcomment %}
         </p>
       </div>

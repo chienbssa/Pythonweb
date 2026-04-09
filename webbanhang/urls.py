@@ -43,6 +43,7 @@ urlpatterns = [
     path('cart/cart_clear/', hv.cart_clear, name='cart_clear'),
     path('cart/',hv.cart_detail,name='cart_detail'),
     path('cart/checkout/',hv.checkout,name='checkout'),
+    path('search/', hv.search, name='search'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

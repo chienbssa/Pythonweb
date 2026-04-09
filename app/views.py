@@ -8,6 +8,7 @@ from django.contrib import messages
 from .models import Order, OrderItem
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.db.models import Q
 def home(request):
     items = Item.objects.all()
     lists= ItemList.objects.all()
@@ -223,3 +224,25 @@ def checkout(request):
 
        return redirect("cart_detail")  # Chuyển hướng về trang giỏ hàng sau khi đặt hàng thành công
   return render(request, 'cart/cart_detail.html')
+
+def search(request):
+    # Lấy từ khóa người dùng nhập vào từ URL (ví dụ: ?q=bánh)
+    query = request.GET.get('q')
+    
+    # Mặc định lấy tất cả sản phẩm và danh mục để hiển thị nếu không nhập gì
+    items = Item.objects.all()
+    lists = ItemList.objects.all()
+
+    if query:
+        # Lọc sản phẩm: tên HOẶC mô tả có chứa từ khóa (icontains: không phân biệt hoa/thường)
+        items = items.filter(
+            Q(name__icontains=query) |
+            Q(description__icontains=query)
+        )
+
+    # Tái sử dụng lại giao diện menu.html để hiển thị kết quả
+    return render(request, 'menu.html', {
+        'items': items, 
+        'list': lists, 
+        'query': query # Truyền thêm query ra frontend để báo "Kết quả tìm kiếm cho..."
+    })
