@@ -97,11 +97,11 @@
                     {{ cart_quantity }}
                 </span>
             </a>
-              <form class="form-inline" action="{% url 'search' %}" method="GET">
-                <input class="form-control mr-sm-2" type="search" placeholder="Tìm sản phẩm..." aria-label="Search" name="q" value="{{ request.GET.q }}">
-                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
+              <form class="custom-search-form" action="{% url 'search' %}" method="GET">
+                <input type="text" class="custom-search-input" placeholder="Tìm sản phẩm..." name="q" value="{{ request.GET.q }}">
+                  <button type="submit" class="custom-search-btn">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
               </form>
               {% if request.user.is_authenticated %}
               <span class="d-flex align-items-center text-danger">

@@ -308,6 +308,45 @@ a:focus {
   top: 0;
 }
 
+.navbar-nav .nav-item .nav-link {
+    white-space: nowrap !important;
+}
+
+.custom-search-form {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 25px;
+    padding: 2px 5px 2px 15px;
+    margin-left: 15px;
+    border: 1px solid #ccc;
+}
+
+.custom-search-input {
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 5px 0;
+    width: 150px;
+    font-size: 15px;
+}
+
+.custom-search-btn {
+    background-color: transparent;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-search-btn:hover {
+    color: #ffbe33;
+}
+
 /*end header section*/
 /* slider section */
 .slider_section {
