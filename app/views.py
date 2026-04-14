@@ -45,6 +45,18 @@ def register(request):
         pass1 = request.POST.get('pass1')
         pass2 = request.POST.get('pass2')
 
+        if not username:
+            messages.error(request, "Vui lòng điền tên đăng nhập!")
+            return redirect('register')
+
+        if not email:
+            messages.error(request, "Vui lòng điền email!")
+            return redirect('register')
+
+        if not pass1 or not pass2:
+            messages.error(request, "Vui lòng điền đầy đủ mật khẩu!")
+            return redirect('register')
+
         if pass1 != pass2:
                 messages.error(request, "Mật khẩu nhập lại không khớp!")
                 return redirect('register')
@@ -168,7 +180,9 @@ def item_increment(request, id):
 def item_decrement(request, id):
     cart = Cart(request)
     product = Item.objects.get(id=id)
-    cart.decrement(product)  # Giảm 1 sản phẩm
+    result = cart.decrement(product)
+    if result == False:
+        messages.error(request, "Số lượng không thể nhỏ hơn 1!")
     return redirect("cart_detail")
 
 def cart_clear(request):
@@ -178,6 +192,20 @@ def cart_clear(request):
 
 def cart_detail(request):
     return render(request, 'cart/cart_detail.html')
+
+def update_quantity(request, id, quantity):
+    cart = Cart(request)
+    product = Item.objects.get(id=id)
+    if quantity < 1:
+        messages.error(request, "Số lượng không thể nhỏ hơn 1!")
+    else:
+        # Đặt số lượng trực tiếp
+        for key, value in cart.cart.items():
+            if key == str(id):
+                value['quantity'] = quantity
+                cart.save()
+                break
+    return redirect("cart_detail")
 
 def checkout(request):
   if request.method == "POST":
