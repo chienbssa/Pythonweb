@@ -209,6 +209,10 @@ def update_quantity(request, id, quantity):
 
 def checkout(request):
   if request.method == "POST":
+       cart_data = request.session.get('cart', {})
+       if not cart_data:
+           messages.error(request, "Giỏ hàng của bạn đang trống, vui lòng thêm sản phẩm trước khi đặt hàng!", extra_tags="danger")
+           return redirect("cart_detail")
        uid = request.session.get('_auth_user_id')
        user = User.objects.get(id=uid) if uid else None
        cart = request.session.get('cart', {})
