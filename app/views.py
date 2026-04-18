@@ -46,31 +46,31 @@ def register(request):
         pass2 = request.POST.get('pass2')
 
         if not username:
-            messages.error(request, "Vui lòng điền tên đăng nhập!")
+            messages.error(request, "Vui lòng điền tên đăng nhập!", extra_tags="danger")
             return redirect('register')
 
         if not email:
-            messages.error(request, "Vui lòng điền email!")
+            messages.error(request, "Vui lòng điền email!", extra_tags="danger")
             return redirect('register')
 
         if not pass1 or not pass2:
-            messages.error(request, "Vui lòng điền đầy đủ mật khẩu!")
+            messages.error(request, "Vui lòng điền đầy đủ mật khẩu!", extra_tags="danger")
             return redirect('register')
 
         if pass1 != pass2:
-                messages.error(request, "Mật khẩu nhập lại không khớp!")
+                messages.error(request, "Mật khẩu nhập lại không khớp!", extra_tags="danger")
                 return redirect('register')
 
         if User.objects.filter(username=username).exists():
-                messages.error(request, "Tên người dùng đã tồn tại!")
+                messages.error(request, "Tên người dùng đã tồn tại!", extra_tags="danger")
                 return redirect('register')
 
         if User.objects.filter(email=email).exists():
-                messages.error(request, "Email đã được sử dụng!")
+                messages.error(request, "Email đã được sử dụng!", extra_tags="danger")
                 return redirect('register')
         customer = User.objects.create_user(username, email, pass1)
         customer.save()
-        messages.success(request, "Đăng ký thành công! Hãy đăng nhập.")
+        messages.success(request, "Đăng ký thành công! Hãy đăng nhập.", extra_tags="success")
         return redirect('register')
     return render(request, 'register.html')
 
