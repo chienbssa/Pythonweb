@@ -9,10 +9,13 @@ from .models import Order, OrderItem
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
+from django.views.decorators.cache import cache_page
+
+@cache_page(60)  # cache 60 giây
 def home(request):
-    items = Item.objects.all()
-    lists= ItemList.objects.all()
-    feedback= Feedback.objects.all()
+    items = Item.objects.select_related('Category').all()[:9]
+    lists = ItemList.objects.only('id', 'Category_name')
+    feedback = Feedback.objects.only('User_name', 'Description', 'Image').order_by('-id')[:5]
     
     return render(request, 'home.html', {'items': items, 'list': lists, 'feedback': feedback})
 
@@ -145,9 +148,10 @@ def contact(request):
 
     return render(request, 'contact.html')
 
+@cache_page(60)
 def menu(request):
-    items = Item.objects.all()
-    lists= ItemList.objects.all()
+    items = Item.objects.select_related('Category').all()
+    lists = ItemList.objects.only('id', 'Category_name')
     return render(request, 'menu.html', {'items': items, 'list': lists})
 
 
