@@ -11,7 +11,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
 from django.views.decorators.cache import cache_page
 
-  # cache 60 giây
+
 def home(request):
     items = Item.objects.select_related('Category').all()[:9]
     lists = ItemList.objects.only('id', 'Category_name')
