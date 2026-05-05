@@ -11,7 +11,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
 from django.views.decorators.cache import cache_page
 
-@cache_page(60)  # cache 60 giây
+  # cache 60 giây
 def home(request):
     items = Item.objects.select_related('Category').all()[:9]
     lists = ItemList.objects.only('id', 'Category_name')
@@ -21,6 +21,7 @@ def home(request):
 
 def about(request):
     return render(request, 'about.html')
+
 
 def user_login(request):
     if request.method == "POST":
@@ -148,7 +149,7 @@ def contact(request):
 
     return render(request, 'contact.html')
 
-@cache_page(60)
+
 def menu(request):
     items = Item.objects.select_related('Category').all()
     lists = ItemList.objects.only('id', 'Category_name')
