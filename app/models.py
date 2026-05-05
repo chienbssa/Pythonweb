@@ -36,8 +36,8 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)  # Cho phép null
     name = models.CharField(max_length=255)
     phone = models.CharField(max_length=15) 
-    province = models.CharField(max_length=100)  
-    district = models.CharField(max_length=100) 
+    province = models.CharField(max_length=255)  
+    district = models.CharField(max_length=255) 
     address = models.TextField()
     note = models.TextField(blank=True, null=True)
     payment_method = models.CharField(max_length=50,)
